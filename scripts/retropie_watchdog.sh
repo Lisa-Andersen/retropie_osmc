@@ -2,8 +2,6 @@
 
 # Script by mcobit
 
-. /home/osmc/RetroPie/scripts/retrosmc-config.cfg
-
 # ugly fix for people having trouble with CEC
 
 if [ "$CECFIX" = 1 ]; then

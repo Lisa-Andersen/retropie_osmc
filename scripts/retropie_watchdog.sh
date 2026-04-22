@@ -1,29 +1,5 @@
 #!/bin/bash
-
-# Script by mcobit
-
-# ugly fix for people having trouble with CEC
-
-if [ "$CECFIX" = 1 ]; then
-sudo /usr/osmc/bin/cec-client -p 1 &
-sleep 1
-sudo kill -9 $(pidof cec-client)
-fi
-
-# deactivate the hyperion deamon if it is running
-
-if [ "$HYPERIONFIX" = 1 ]; then
-   if [ $(pgrep hyperion) ]; then
-      sudo service hyperion stop
-   fi
-fi
-
-# activate hyperion daemon if it is not running
-if [ "$HYPERIONFIX" = 1 ]; then
-   if [ ! $(pgrep hyperion) ]; then
-      sudo service hyperion start
-   fi
-fi
+cd /home/osmc/RetroPie/scripts
 
 # check for emulationstation running
 echo "retropie_watchdog.sh: check for emulationstation running:" >> retropiestarter.log

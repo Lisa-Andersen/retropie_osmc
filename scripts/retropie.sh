@@ -1,6 +1,5 @@
-
 #!/bin/bash
-cd /home/osmc
+cd /home/osmc/RetroPie/scripts
 
 # This scripts starts the emulationstation watchdog deamon and
 # emulationstation itself while stopping KODI afterwards.
@@ -10,9 +9,6 @@ cd /home/osmc
 # stop kodi to free input devices for emulationstation
 echo "retropie.sh: call retropie_starter.sh" > retropiestarter.log
 sudo su osmc -c "sh /home/osmc/RetroPie/scripts/retropie_starter.sh &" &
-sleep 1
-echo "retropie.sh: call systemctl stop mediacenter" >> retropiestarter.log
-sudo su -c "systemctl stop mediacenter" 
 
 echo "retropie.sh: done exit" >> retropiestarter.log
 exit

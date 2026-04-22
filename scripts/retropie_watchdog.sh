@@ -18,27 +18,7 @@ if [ "$HYPERIONFIX" = 1 ]; then
    fi
 fi
 
-# give emulationstation time to start up
-VAR2="$(pgrep mediacenter)"
-while [ "$VAR2" ]; do
-	VAR2="$(pgrep mediacenter)"
-	echo "retropie_watchdog.sh:mediacenter active. sleep 0.5"	 >> retropiestarter.log
-	sleep 0.5
-done
-echo "retropie_watchdog.sh: mediacenter not active anymore. sleep 5"	 >> retropiestarter.log
-sleep 30
-#VAR2="$(pgrep emulationstation )"
-#while [ ! "$VAR2" ]; do
-#	VAR2="$(pgrep emulationstation )"
-#	echo "retropie_watchdog.sh: (VAR2 = '$VAR2') emulationstation is not active. sleep 0.5"	 >> retropiestarter.log
-#	sleep 0.5
-#done
-#echo "retropie_watchdog.sh:emulationstation is active."	 >> retropiestarter.log
-
-
-echo "emulationstation is active. sleep 5 (To ensure complete startup)"	 >> retropiestarter.log
 # activate hyperion daemon if it is not running
-
 if [ "$HYPERIONFIX" = 1 ]; then
    if [ ! $(pgrep hyperion) ]; then
       sudo service hyperion start
@@ -53,20 +33,13 @@ while [ true ]; do
 # if emulationstation is quit, clear the screen of virtual terminal 7 and show a message
 
 		if [ ! "$VAR1" ]; then
-			echo "retropie_watchdog.sh: emulationstation is quit" >> retropiestarter.log
-
+			echo "retropie_watchdog.sh: emulationstation is quit - clear terminal 7" >> retropiestarter.log
 			sudo openvt -c 7 -s -f clear
 
 # restart kodi			
-			echo "retropie_watchdog.sh: sleep (emustation is quit)" >> retropiestarter.log
-			sleep 2
-
 			echo "retropie_watchdog.sh: call mediacenter (emulationstation is quit)" >> retropiestarter.log
 			sudo su -c "sudo systemctl restart mediacenter &" &
-			echo "retropie_watchdog.sh: called mediacenter (emulationstation is quit)" >> retropiestarter.log
-			sleep 15
 # exit script
-
 			exit
 		else
 
